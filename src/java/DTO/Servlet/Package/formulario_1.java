@@ -5,6 +5,8 @@
  */
 package DTO.Servlet.Package;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author wezarkeVo
@@ -15,8 +17,34 @@ public class formulario_1 {
     private int cuotas;
     private double cuotaInicial;
     private String tipoInmueble;
+    
+    public double castInt;
+    public double saldoActual;
+    public double valorXCuota;
+    public double iteracionDescuento;
+    public String Format_2;
+    
+   public double getCastInt(){
+       this.castInt = Double.parseDouble(this.tipoInmueble);
+       return castInt;
+   } 
+    
+    
+   public double getSaldoActual(double castInt){
+       this.saldoActual = castInt - this.cuotaInicial;
+       return saldoActual;
+   } 
+    
+   public double getValorXCuota(double saldoActual){
+     this.valorXCuota = saldoActual/this.cuotas;
+     return valorXCuota;
+   }
+    
+   public double getIteracionDescuento(double saldoActual){
+       this.iteracionDescuento = saldoActual;
+       return iteracionDescuento;
+   }
    
-
     public formulario_1(String nombre, int cuotas, double cuotaInicial, String tipoInmueble) {
         this.nombre = nombre;
         this.cuotas = cuotas;
