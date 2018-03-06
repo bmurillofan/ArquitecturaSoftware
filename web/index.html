@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Assets Shop</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Refresh" content="3;url=http://localhost:8084/Assets_Shop/mainServlet">
+    </head>
+    <body>
+    <center>
+        <div>Bienvenido al Asset Shop</div>
+        <br>
+        <br>
+        <form name="formulario_1" method="POST">
+            <input type="text" name="nombre" placeholder="Por favor ingrese el nombre" required>
+            <br>           
+            <input type="radio" name="tipoInmueble" value="casa_1" required>Casa 80m²<br>
+            <input type="radio" name="tipoInmueble" value="casa_2" required>Casa 100m²<br>
+            <input type="radio" name="tipoInmueble" value="apto_1" required>Apto 45²<br>
+            <input type="radio" name="tipoInmueble" value="apto_2" required>Apto 60m²<br>
+            <input type="text" name="numeroCuotas" placeholder="Numero de cuotas" required><br>
+            <input type="text" name="cuotaInicial" placeholder="Cuota inicial" required><br> 
+            <br>
+            
+            
+            <input type="submit" value="Cargar Datos">
+        </form>
+        <p>Cargando Servlet....</p>
+    </center>
+    </body>
+</html>
