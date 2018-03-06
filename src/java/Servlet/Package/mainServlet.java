@@ -73,24 +73,53 @@ public class mainServlet extends HttpServlet {
             out.println("Bienvenid@ <Strong>"+ myForm.getNombre()+"</Strong> en la siguiente tabla se calculara sus cuotas");
             out.println("<br>");
             out.println("<br>");
-            out.println("Numero de cuotas  ----------  Valor Cuota ---------- Saldo Pendiente");
+
             
-            
-            double castInt = Double.parseDouble(myForm.getTipoInmueble());
-            double saldoActual = castInt - myForm.getCuotaInicial();
-            double valorXCuota = saldoActual/myForm.getCuotas();
-            double iteracionDescuento = saldoActual;
+            double var = myForm.getCastInt();
+            double var_1 = myForm.getSaldoActual(var);
+            double iteracionDescuento = myForm.getIteracionDescuento(var_1);  
+            double valorXCuota = myForm.getValorXCuota(var_1);    
             String Format_1 = new DecimalFormat("#.###############").format(valorXCuota);
-            String Format_2;
+            String FormatAll = new DecimalFormat("#.###############").format(iteracionDescuento);
+            out.println("<br>Calculo viabilidad: $"+FormatAll+"<br>");
+            out.println("  Numero de cuotas  ----------  Valor Cuota ---------- Saldo Pendiente<br><br>");
             
+            if (myForm.getCuotas()>myForm.getCastInt()) {
+                       out.println("<br>No se permite la cantidad de cuotas, por favor disminuya la cifra<br>");
+                }else{
+            
+            if(myForm.getCuotaInicial()== myForm.getCastInt()){
+                myForm.Format_2 = new DecimalFormat("#.###############").format(iteracionDescuento);
+                out.println("<br>"+"Se ignoró el numero de cuotas, el pago esta completado<br>");
+            }else if(myForm.getCuotaInicial()> myForm.getCastInt()){
+                double saldoXExcedido = myForm.getCuotaInicial()- myForm.getCastInt();
+                var_1 = myForm.getCuotaInicial()-saldoXExcedido; 
+                iteracionDescuento = myForm.getIteracionDescuento(var_1);
+                valorXCuota = myForm.getValorXCuota(var_1);    
+                String Format_3 = new DecimalFormat("#.###############").format(valorXCuota);
+                for (int i = 1; i <= myForm.getCuotas(); i++) {
+                iteracionDescuento = iteracionDescuento - valorXCuota; 
+                myForm.Format_2 = new DecimalFormat("#.###############").format(iteracionDescuento);
+                out.println("<br>"+"Cuota #"+i+"---------- $"+Format_3+" ---------- $"+myForm.Format_2+"<br>");
+                 
+                }  
+                String Format_Temp = new DecimalFormat("#.###############").format(saldoXExcedido);
+                out.println("<br>Felicidades! Se le retornara un valor de $"+Format_Temp+" de su cuota inicial<br>");
+                
+             }else{
+                
+                        for (int i = 1; i <= myForm.getCuotas(); i++) {
+                        iteracionDescuento = iteracionDescuento - valorXCuota; 
+                        myForm.Format_2 = new DecimalFormat("#.###############").format(iteracionDescuento);
+                        out.println("<br>"+"Cuota #"+i+"---------- $"+Format_1+" ---------- $"+myForm.Format_2+"<br>");
+                        }    
+                
+                
                     
+                }
             
-           
-            for (int i = 1; i <= myForm.getCuotas(); i++) {
-                 iteracionDescuento = iteracionDescuento - valorXCuota; 
-                 Format_2 = new DecimalFormat("#.###############").format(iteracionDescuento);
-                 out.println("<br>"+"Cuota #"+i+"---------- $"+Format_1+" ---------- $"+Format_2+"<br>");
             }
+            
             
              
             out.println("</center>");
